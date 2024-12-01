@@ -1,24 +1,52 @@
-import 'package:working_equitation_manager/Models/cow_trial.dart';
-import 'package:working_equitation_manager/Models/dressage_trial.dart';
-import 'package:working_equitation_manager/Models/ease_of_handling_trial.dart';
-import 'package:working_equitation_manager/Models/horse.dart';
-import 'package:working_equitation_manager/Models/speed_trial.dart';
+import 'package:objectbox/objectbox.dart';
+import 'package:working_equitation_manager/Database/Models/cow_trial.dart';
+import 'package:working_equitation_manager/Database/Models/dressage_trial.dart';
+import 'package:working_equitation_manager/Database/Models/ease_of_handling_trial.dart';
+import 'package:working_equitation_manager/Database/Models/horse.dart';
+import 'package:working_equitation_manager/Database/Models/speed_trial.dart';
 
-
-
+@Entity()
 class Rider {
-  late int id;
+  @Id()
+  int id = 0;
 
-  int? showId;
-   Horse? horse; 
-  late int level;
-  late String name; 
-  late String usaweId;
-   CowTrial? cowTrial;  
-  late String division;
-  SpeedTrial? speedTrial;  
-  DressageTrial? dressageTrial;  
-  EaseOfHandlingTrial? easeOfHandlingTrial;  
+  /// This is the id issued to the rider at the show.
+  // int showId;
+
+  /// This is the level of the rider. 1-7
+  int level;
+
+  ///The first and last name of the rider.
+  String name;
+
+  ///The USAWE id of the rider.
+  String usaweId;
+
+  ///The division the rider is competing in. Open/Amateur/Youth
+  String division;
+
+  /// The horse the rider is riding.
+  final horse = ToOne<Horse>();
+
+  /// The Speed Trial for the rider.
+  final speedTrial = ToOne<SpeedTrial>();
+
+  /// The Cow Trial for the rider.
+  final cowTrial = ToOne<CowTrial>();
+
+  /// The Dressage Trial for the rider.
+  final dressageTrial = ToOne<DressageTrial>();
+
+  /// The Ease of Handling Trial for the rider.
+  final easeOfHandlingTrial = ToOne<EaseOfHandlingTrial>();
+
+  Rider({
+    required this.level,
+    required this.name,
+    // required this.showId,
+    required this.usaweId,
+    required this.division,
+  });
 }
 
 //   Rider({

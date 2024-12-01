@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:working_equitation_manager/Database/objectbox.dart';
 import 'package:working_equitation_manager/Home/home_page.dart';
-/// A class that defines the routes used in the application.
-///
-/// This class contains static constants for route names and a static map
-/// that associates each route with its corresponding widget builder.
+import 'package:working_equitation_manager/New%20Show/new_show_page.dart';
+
 class AppRoutes {
+  final ObjectBox objectBox;
+
+  AppRoutes({required this.objectBox});
+
   /// The route name for the home page.
   static const String home = '/';
 
@@ -14,14 +17,16 @@ class AppRoutes {
   /// The route name for managing a show.
   static const String show = '/manageShow';
 
-  /// A map that associates route names with their corresponding widget builders.
+  /// A method that returns a map associating route names with widget builders.
   ///
-  /// - `home`: Builds the `HomePage` widget.
-  /// - `newShow`: Builds a `Placeholder` widget.
-  /// - `show`: Builds a `Placeholder` widget.
-  static Map<String, WidgetBuilder> routes = {
-    home: (context) => const HomePage(),
-    newShow: (context) => const Placeholder(),
-    show: (context) => const Placeholder(),
-  };
+  /// This method provides a way to pass `ObjectBox` to the necessary pages.
+  Map<String, WidgetBuilder> getRoutes() {
+    return {
+      home: (context) => HomePage(objectBox: objectBox),
+      newShow: (context) => NewShowPage(
+            objectBox: objectBox,
+          ),
+      show: (context) => const Placeholder(),
+    };
+  }
 }

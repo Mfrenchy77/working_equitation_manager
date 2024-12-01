@@ -1,14 +1,35 @@
-import 'package:working_equitation_manager/Models/movement.dart';
+import 'package:objectbox/objectbox.dart';
+import 'package:working_equitation_manager/Database/Models/movement.dart';
 
-
+@Entity()
 class EaseOfHandlingTrial {
-  late int id;
+  @Id()
+  int id = 0;
 
-  late int level;
-  int? finalScore;
-  late int numberOfObstacles;
-  late List<Movement> obstacles;
-  late List<Movement> collectives;
+  /// The level of the trial. 1-7
+  int level = 0;
+
+  /// Final Score of the Ease of Handling Trial.
+  /// in percentage e.g. 75.000%
+  double? finalScore;
+
+  /// The number of obstacles in the trial.
+  int numberOfObstacles = 0;
+
+  /// The list of obstacles in the trial.
+  // @Backlink('easeOfHandlingTrial')
+  final obstacles = ToMany<Movement>();
+
+  /// The list of collectives in the trial.
+  // @Backlink('easeOfHandlingTrial')
+  final collectives = ToMany<Movement>();
+
+  // EaseOfHandlingTrial({
+  //   this.id = 0,
+  //   this.finalScore,
+  //   required this.level,
+  //   required this.numberOfObstacles,
+  // });
 }
 
 //   EaseOfHandlingTrial({

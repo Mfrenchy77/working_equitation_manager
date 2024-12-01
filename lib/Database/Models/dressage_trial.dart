@@ -1,16 +1,51 @@
-import 'package:working_equitation_manager/Models/movement.dart';
+import 'package:objectbox/objectbox.dart';
+import 'package:working_equitation_manager/Database/Models/movement.dart';
 
-
+@Entity()
 class DressageTrial {
-  late int id;
+  @Id()
+  int id = 0;
 
-  late int level;
+  /// The level of the trial. 1-7
+  int? level;
+
+  /// Final Score of the Dressage Trial. In percentage e.g. 75.000%
   int? finalScore;
-  late int deductions = 0;
-  late int numberOfMovements;
-  late int totalPossiblePoints;
-  late List<Movement> movements;
-  late List<Movement> collectives;
+
+  /// The number of points deducted from the final score.
+  int deductions;
+
+  /// The number of movements in the trial.
+  int numberOfMovements;
+
+  /// The total possible points for the trial.
+  int totalPossiblePoints;
+
+  /// The list of movements in the trial.
+  // @Backlink('dressageTrial')
+  final movements = ToMany<Movement>();
+
+  /// The list of collectives in the trial.
+  // @Backlink('dressageTrial')
+  final collectives = ToMany<Movement>();
+
+  DressageTrial({
+    this.id = 0,
+    this.finalScore,
+    required this.level,
+    this.deductions = 0,
+    required this.numberOfMovements,
+    required this.totalPossiblePoints,
+  });
+
+  // DressageTrial({
+  //   this.id = 0,
+  //   this.finalScore,
+  //   required this.level,
+  //   this.deductions = 0,
+  //   required this.numberOfMovements,
+  //   required this.totalPossiblePoints,
+  // });
 }
 //   DressageTrial({
 //     this.finalScore,

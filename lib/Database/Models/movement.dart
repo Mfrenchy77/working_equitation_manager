@@ -1,15 +1,23 @@
+import 'package:objectbox/objectbox.dart';
 
 /// Class the represents a movement in the Dressage Trial
 /// & Ease of Handling Trial
 
-
+@Entity()
 class Movement {
-  late int id;
-
+  @Id()
+  int id = 0;
   int? score;
-  late String name;
+  String name;
   String? comment;
-  late int coefficient = 1;
+  int coefficient;
+
+  Movement({
+    this.score,
+    this.comment,
+    required this.name,
+    this.coefficient = 1,
+  });
 }
 // }
 //   //copywith

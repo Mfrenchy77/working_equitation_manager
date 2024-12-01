@@ -1,40 +1,41 @@
-class SpeedTrial {
-  late int bonus = 0;
-  late int penalties = 0;
-  late int finalSpeed;
-  late int initialSpeed = 0;
+import 'package:objectbox/objectbox.dart';
+
+@Entity()
+class CowTrial {
+  @Id()
+  int id = 0;
+  int penalties;
+  int finalSpeed;
+  int initialSpeed;
+
+  CowTrial({
+    this.penalties = 0,
+    this.finalSpeed = 0,
+    this.initialSpeed = 0,
+  });
 }
 
-//   SpeedTrial({
-//     required this.bonus,
+//   CowTrial({
 //     required this.penalties,
 //     required this.finalSpeed,
 //     required this.initialSpeed,
 //   });
 
-//   SpeedTrial copyWith({
-//     int? bonus,
+//   CowTrial copyWith({
 //     int? penalties,
 //     int? finalSpeed,
 //     int? initialSpeed,
 //   }) {
-//     return SpeedTrial(
-//       bonus: bonus ?? this.bonus,
+//     return CowTrial(
 //       penalties: penalties ?? this.penalties,
 //       finalSpeed: finalSpeed ?? this.finalSpeed,
 //       initialSpeed: initialSpeed ?? this.initialSpeed,
 //     );
 //   }
 
-//   // final speed equals initial speed plus penalties minus bonus
-//   int get totalSpeed {
-//     return initialSpeed + penalties - bonus;
-//   }
-
 //   //toMap
 //   Map<String, dynamic> toMap() {
 //     return {
-//       'bonus': bonus,
 //       'penalties': penalties,
 //       'finalSpeed': finalSpeed,
 //       'initialSpeed': initialSpeed,
@@ -42,9 +43,8 @@ class SpeedTrial {
 //   }
 
 //   //fromMap
-//   factory SpeedTrial.fromMap(Map<String, dynamic> map) {
-//     return SpeedTrial(
-//       bonus: map['bonus'],
+//   factory CowTrial.fromMap(Map<String, dynamic> map) {
+//     return CowTrial(
 //       penalties: map['penalties'],
 //       finalSpeed: map['finalSpeed'],
 //       initialSpeed: map['initialSpeed'],

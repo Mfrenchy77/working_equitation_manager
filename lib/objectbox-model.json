@@ -1,0 +1,367 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:63250940508551214",
+      "lastPropertyId": "4:8592155193016830314",
+      "name": "CowTrial",
+      "properties": [
+        {
+          "id": "1:8979404150974326776",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:4267876305057843098",
+          "name": "penalties",
+          "type": 6
+        },
+        {
+          "id": "3:3106565612549053962",
+          "name": "finalSpeed",
+          "type": 6
+        },
+        {
+          "id": "4:8592155193016830314",
+          "name": "initialSpeed",
+          "type": 6
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:2703117802835632783",
+      "lastPropertyId": "6:3790004214224889617",
+      "name": "DressageTrial",
+      "properties": [
+        {
+          "id": "1:784299847791076873",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:5665698535716992632",
+          "name": "level",
+          "type": 6
+        },
+        {
+          "id": "3:4336611006830846796",
+          "name": "finalScore",
+          "type": 6
+        },
+        {
+          "id": "4:6093126611907525339",
+          "name": "deductions",
+          "type": 6
+        },
+        {
+          "id": "5:8554875908340660420",
+          "name": "numberOfMovements",
+          "type": 6
+        },
+        {
+          "id": "6:3790004214224889617",
+          "name": "totalPossiblePoints",
+          "type": 6
+        }
+      ],
+      "relations": [
+        {
+          "id": "1:5022004700891805289",
+          "name": "movements",
+          "targetId": "5:2675766736071501523"
+        },
+        {
+          "id": "2:6500097012327221885",
+          "name": "collectives",
+          "targetId": "5:2675766736071501523"
+        }
+      ]
+    },
+    {
+      "id": "3:7578264731106799850",
+      "lastPropertyId": "4:667930973857147443",
+      "name": "EaseOfHandlingTrial",
+      "properties": [
+        {
+          "id": "1:2643718246965358947",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:3740177021117019789",
+          "name": "level",
+          "type": 6
+        },
+        {
+          "id": "3:1707713340493578248",
+          "name": "finalScore",
+          "type": 8
+        },
+        {
+          "id": "4:667930973857147443",
+          "name": "numberOfObstacles",
+          "type": 6
+        }
+      ],
+      "relations": [
+        {
+          "id": "3:3787620749565465966",
+          "name": "obstacles",
+          "targetId": "5:2675766736071501523"
+        },
+        {
+          "id": "4:8601128172282941843",
+          "name": "collectives",
+          "targetId": "5:2675766736071501523"
+        }
+      ]
+    },
+    {
+      "id": "4:3850228166504749069",
+      "lastPropertyId": "3:5199553903871087052",
+      "name": "Horse",
+      "properties": [
+        {
+          "id": "1:7427565582528182156",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:3296866496827052613",
+          "name": "usaweId",
+          "type": 6
+        },
+        {
+          "id": "3:5199553903871087052",
+          "name": "name",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "5:2675766736071501523",
+      "lastPropertyId": "5:3661289767123217734",
+      "name": "Movement",
+      "properties": [
+        {
+          "id": "1:6361744352729221838",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:4425802224324552267",
+          "name": "score",
+          "type": 6
+        },
+        {
+          "id": "3:8815371143098432932",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "4:3116176411750949501",
+          "name": "comment",
+          "type": 9
+        },
+        {
+          "id": "5:3661289767123217734",
+          "name": "coefficient",
+          "type": 6
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "6:4883577621006176284",
+      "lastPropertyId": "11:2706689388499001140",
+      "name": "Rider",
+      "properties": [
+        {
+          "id": "1:7276628588297421678",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "3:5969945047832807455",
+          "name": "level",
+          "type": 6
+        },
+        {
+          "id": "4:98659955271180779",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "5:8557452512096679501",
+          "name": "usaweId",
+          "type": 9
+        },
+        {
+          "id": "6:7742956392015050079",
+          "name": "division",
+          "type": 9
+        },
+        {
+          "id": "7:9059132646827851726",
+          "name": "horseId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "1:3997345600747617928",
+          "relationTarget": "Horse"
+        },
+        {
+          "id": "8:613611606511666812",
+          "name": "speedTrialId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "2:3363223653990071986",
+          "relationTarget": "SpeedTrial"
+        },
+        {
+          "id": "9:83562232001080600",
+          "name": "cowTrialId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "3:953812502317162990",
+          "relationTarget": "CowTrial"
+        },
+        {
+          "id": "10:7523432754969229718",
+          "name": "dressageTrialId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "4:8511625803678800472",
+          "relationTarget": "DressageTrial"
+        },
+        {
+          "id": "11:2706689388499001140",
+          "name": "easeOfHandlingTrialId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "5:154860879866054309",
+          "relationTarget": "EaseOfHandlingTrial"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "7:5717436637775268798",
+      "lastPropertyId": "11:3386301996721487134",
+      "name": "Show",
+      "properties": [
+        {
+          "id": "1:6443553067535165832",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:1349571348782008618",
+          "name": "regionNumber",
+          "type": 6
+        },
+        {
+          "id": "3:5937993669393497191",
+          "name": "showLicenseNumber",
+          "type": 6
+        },
+        {
+          "id": "4:6154353341279453764",
+          "name": "competitionName",
+          "type": 9
+        },
+        {
+          "id": "5:9006543490485820043",
+          "name": "facuilityNameandAddress",
+          "type": 9
+        },
+        {
+          "id": "6:5342386886133429611",
+          "name": "showDateAndStartTime",
+          "type": 9
+        },
+        {
+          "id": "7:4085013099005688624",
+          "name": "showOrganizers",
+          "type": 30
+        },
+        {
+          "id": "8:6028468566126476842",
+          "name": "isDraft",
+          "type": 1
+        },
+        {
+          "id": "11:3386301996721487134",
+          "name": "showTypeString",
+          "type": 9
+        }
+      ],
+      "relations": [
+        {
+          "id": "5:6368276511851888509",
+          "name": "riders",
+          "targetId": "6:4883577621006176284"
+        }
+      ]
+    },
+    {
+      "id": "8:4065534881636303013",
+      "lastPropertyId": "5:2442408713560850730",
+      "name": "SpeedTrial",
+      "properties": [
+        {
+          "id": "1:8819470891384763999",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:8631061760606706837",
+          "name": "bonus",
+          "type": 6
+        },
+        {
+          "id": "3:5755240725817916353",
+          "name": "finalSpeed",
+          "type": 6
+        },
+        {
+          "id": "4:7586374786020243661",
+          "name": "penalties",
+          "type": 6
+        },
+        {
+          "id": "5:2442408713560850730",
+          "name": "initialSpeed",
+          "type": 6
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "8:4065534881636303013",
+  "lastIndexId": "5:154860879866054309",
+  "lastRelationId": "5:6368276511851888509",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [
+    4514435501998974196,
+    5250495783960195806,
+    6238531958365320550
+  ],
+  "retiredRelationUids": [],
+  "version": 1
+}

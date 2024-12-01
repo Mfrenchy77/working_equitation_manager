@@ -1,10 +1,17 @@
+import 'package:objectbox/objectbox.dart';
 
-
+@Entity()
 class Horse {
-  late int id;
+  @Id()
+  int id = 0;
 
-  late String name;
-  late int usaweId;
+  int usaweId;
+  String name;
+
+  Horse({
+    required this.name,
+    required this.usaweId,
+  });
 }
 
 //   Horse copyWith({
