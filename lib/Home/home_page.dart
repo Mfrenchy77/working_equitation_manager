@@ -8,7 +8,7 @@ import 'package:working_equitation_manager/New%20Show/new_show_page.dart';
 import 'package:working_equitation_manager/Utils/common_widgets.dart';
 
 class HomePage extends StatelessWidget {
-  static const routeName = '/home';
+  static const routeName = '/';
 
   final ObjectBox objectBox;
   const HomePage({super.key, required this.objectBox});
@@ -17,12 +17,10 @@ class HomePage extends StatelessWidget {
 
   get showId => null;
 
-// Home page will have a our logo and then a button for New Show that will open up the new show setup page. and a list of shows that are saved.
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ShowListCubit(objectBox)..loadShows(),
+      create: (context) => ShowListCubit(objectBox),
       child: Scaffold(
         body: BlocBuilder<ShowListCubit, List<Show>>(
           builder: (context, shows) {
@@ -63,11 +61,19 @@ class HomePage extends StatelessWidget {
 
                           // if the show is a draft, open the new show page with the draft show
                           if (show.isDraft) {
-                            Navigator.pushNamed(context, NewShowPage.routeName,
-                                arguments: show);
+                            debugPrint(
+                                'Pushing new show page with draft showname ${show.competitionName}');
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return NewShowPage(
+                                draftShow: show,
+                                objectBox: objectBox,
+                              );
+                            }));
                           } else {
+                            debugPrint('Show ${show.id} is a final show');
+
                             // if the show is final, open the show details page
-                            // Navigator.pushNamed(context, ShowDetailsPage.routeName, arguments: show);
                           }
                         },
                         title: Text('${show.id}\n${show.competitionName}'),

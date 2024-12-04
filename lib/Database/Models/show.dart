@@ -1,7 +1,12 @@
+import 'package:objectbox/objectbox.dart';
 import 'package:working_equitation_manager/Database/Models/rider.dart';
 import 'package:working_equitation_manager/New%20Show/Cubit/show_form_cubit.dart';
 import 'package:working_equitation_manager/objectbox.g.dart';
 
+/// The Show class represents a show in the Working Equitation Manager app.
+/// Shows are used to store information about a show, the name, date, location,
+/// start, showtype region, and license number. It also all of the riders that
+/// are participating in the show which contain all of their scores.
 @Entity()
 class Show {
   /// The unique identifier for the show.
@@ -11,11 +16,14 @@ class Show {
   /// Set the Draft status of the show.
   bool isDraft;
 
-  /// The show's ShowType stored as a string.
-  String? showTypeString;
-
   /// The Region number of the show.
   int? regionNumber;
+
+  /// The facility name
+  String? facilityName;
+
+  /// The show's ShowType stored as a string.
+  String? showTypeString;
 
   /// The license number of the show.
   int? showLicenseNumber;
@@ -23,11 +31,11 @@ class Show {
   /// The name of the show.
   String? competitionName;
 
-  /// The date of the show and start time including time zone.
-  String? showDateAndStartTime;
+  /// The facility address
+  String? facilityAddress;
 
-  /// The facility name and address of the show.
-  String? facuilityNameandAddress;
+  /// The date of the show and start time including time zone.
+  DateTime? showDateAndStartTime;
 
   /// Provide the names and email addresses of up to two (2) people you’d like to
   /// have set up as GIRA organizers to be authorized to set up, score, print results, and download the
@@ -38,39 +46,41 @@ class Show {
 
   Show({
     this.id,
-    ShowType? showType,
     this.regionNumber,
+    ShowType? showType,
+    this.facilityName,
     this.isDraft = true,
     this.showOrganizers,
     this.competitionName,
+    this.facilityAddress,
     this.showLicenseNumber,
     this.showDateAndStartTime,
-    this.facuilityNameandAddress,
   }) : showTypeString = showType?.name;
 
   // Copy with method
   Show copyWith({
     int? id,
     bool? isDraft,
-    ShowType? showType,
     int? regionNumber,
+    ShowType? showType,
+    String? facilityName,
     int? showLicenseNumber,
     String? competitionName,
+    String? facilityAddress,
     List<String>? showOrganizers,
-    String? showDateAndStartTime,
-    String? facuilityNameandAddress,
+    DateTime? showDateAndStartTime,
   }) {
     return Show(
       id: id ?? this.id,
       isDraft: isDraft ?? this.isDraft,
       showType: showType ?? this.showType,
       regionNumber: regionNumber ?? this.regionNumber,
+      facilityName: facilityName ?? this.facilityName,
       showOrganizers: showOrganizers ?? this.showOrganizers,
       competitionName: competitionName ?? this.competitionName,
+      facilityAddress: facilityAddress ?? this.facilityAddress,
       showLicenseNumber: showLicenseNumber ?? this.showLicenseNumber,
       showDateAndStartTime: showDateAndStartTime ?? this.showDateAndStartTime,
-      facuilityNameandAddress:
-          facuilityNameandAddress ?? this.facuilityNameandAddress,
     );
   }
 
@@ -86,9 +96,6 @@ class Show {
     showTypeString = showType?.name;
   }
 }
-
-
-
 
 //   //copywith
 //   Show copyWith({

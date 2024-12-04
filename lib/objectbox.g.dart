@@ -271,7 +271,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(7, 5717436637775268798),
       name: 'Show',
-      lastPropertyId: const obx_int.IdUid(11, 3386301996721487134),
+      lastPropertyId: const obx_int.IdUid(15, 1286389775037105914),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -295,14 +295,9 @@ final _entities = <obx_int.ModelEntity>[
             type: 9,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(5, 9006543490485820043),
-            name: 'facuilityNameandAddress',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
             id: const obx_int.IdUid(6, 5342386886133429611),
             name: 'showDateAndStartTime',
-            type: 9,
+            type: 10,
             flags: 0),
         obx_int.ModelProperty(
             id: const obx_int.IdUid(7, 4085013099005688624),
@@ -317,6 +312,16 @@ final _entities = <obx_int.ModelEntity>[
         obx_int.ModelProperty(
             id: const obx_int.IdUid(11, 3386301996721487134),
             name: 'showTypeString',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(14, 7864380504808640336),
+            name: 'facilityName',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(15, 1286389775037105914),
+            name: 'facilityAddress',
             type: 9,
             flags: 0)
       ],
@@ -407,7 +412,10 @@ obx_int.ModelDefinition getObjectBoxModel() {
       retiredPropertyUids: const [
         4514435501998974196,
         5250495783960195806,
-        6238531958365320550
+        6238531958365320550,
+        9006543490485820043,
+        2455015182728008432,
+        5292552555377055273
       ],
       retiredRelationUids: const [],
       modelVersion: 5,
@@ -697,13 +705,6 @@ obx_int.ModelDefinition getObjectBoxModel() {
           final competitionNameOffset = object.competitionName == null
               ? null
               : fbb.writeString(object.competitionName!);
-          final facuilityNameandAddressOffset =
-              object.facuilityNameandAddress == null
-                  ? null
-                  : fbb.writeString(object.facuilityNameandAddress!);
-          final showDateAndStartTimeOffset = object.showDateAndStartTime == null
-              ? null
-              : fbb.writeString(object.showDateAndStartTime!);
           final showOrganizersOffset = object.showOrganizers == null
               ? null
               : fbb.writeList(object.showOrganizers!
@@ -712,26 +713,38 @@ obx_int.ModelDefinition getObjectBoxModel() {
           final showTypeStringOffset = object.showTypeString == null
               ? null
               : fbb.writeString(object.showTypeString!);
-          fbb.startTable(12);
+          final facilityNameOffset = object.facilityName == null
+              ? null
+              : fbb.writeString(object.facilityName!);
+          final facilityAddressOffset = object.facilityAddress == null
+              ? null
+              : fbb.writeString(object.facilityAddress!);
+          fbb.startTable(16);
           fbb.addInt64(0, object.id ?? 0);
           fbb.addInt64(1, object.regionNumber);
           fbb.addInt64(2, object.showLicenseNumber);
           fbb.addOffset(3, competitionNameOffset);
-          fbb.addOffset(4, facuilityNameandAddressOffset);
-          fbb.addOffset(5, showDateAndStartTimeOffset);
+          fbb.addInt64(5, object.showDateAndStartTime?.millisecondsSinceEpoch);
           fbb.addOffset(6, showOrganizersOffset);
           fbb.addBool(7, object.isDraft);
           fbb.addOffset(10, showTypeStringOffset);
+          fbb.addOffset(13, facilityNameOffset);
+          fbb.addOffset(14, facilityAddressOffset);
           fbb.finish(fbb.endTable());
           return object.id ?? 0;
         },
         objectFromFB: (obx.Store store, ByteData fbData) {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
+          final showDateAndStartTimeValue =
+              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 14);
           final idParam =
               const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 4);
           final regionNumberParam =
               const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 6);
+          final facilityNameParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 30);
           final isDraftParam =
               const fb.BoolReader().vTableGet(buffer, rootOffset, 18, false);
           final showOrganizersParam = const fb.ListReader<String>(
@@ -741,23 +754,24 @@ obx_int.ModelDefinition getObjectBoxModel() {
           final competitionNameParam =
               const fb.StringReader(asciiOptimization: true)
                   .vTableGetNullable(buffer, rootOffset, 10);
+          final facilityAddressParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 32);
           final showLicenseNumberParam =
               const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 8);
-          final showDateAndStartTimeParam =
-              const fb.StringReader(asciiOptimization: true)
-                  .vTableGetNullable(buffer, rootOffset, 14);
-          final facuilityNameandAddressParam =
-              const fb.StringReader(asciiOptimization: true)
-                  .vTableGetNullable(buffer, rootOffset, 12);
+          final showDateAndStartTimeParam = showDateAndStartTimeValue == null
+              ? null
+              : DateTime.fromMillisecondsSinceEpoch(showDateAndStartTimeValue);
           final object = Show(
               id: idParam,
               regionNumber: regionNumberParam,
+              facilityName: facilityNameParam,
               isDraft: isDraftParam,
               showOrganizers: showOrganizersParam,
               competitionName: competitionNameParam,
+              facilityAddress: facilityAddressParam,
               showLicenseNumber: showLicenseNumberParam,
-              showDateAndStartTime: showDateAndStartTimeParam,
-              facuilityNameandAddress: facuilityNameandAddressParam)
+              showDateAndStartTime: showDateAndStartTimeParam)
             ..showTypeString = const fb.StringReader(asciiOptimization: true)
                 .vTableGetNullable(buffer, rootOffset, 24);
           obx_int.InternalToManyAccess.setRelInfo<Show>(object.riders, store,
@@ -989,25 +1003,29 @@ class Show_ {
   static final competitionName =
       obx.QueryStringProperty<Show>(_entities[6].properties[3]);
 
-  /// See [Show.facuilityNameandAddress].
-  static final facuilityNameandAddress =
-      obx.QueryStringProperty<Show>(_entities[6].properties[4]);
-
   /// See [Show.showDateAndStartTime].
   static final showDateAndStartTime =
-      obx.QueryStringProperty<Show>(_entities[6].properties[5]);
+      obx.QueryDateProperty<Show>(_entities[6].properties[4]);
 
   /// See [Show.showOrganizers].
   static final showOrganizers =
-      obx.QueryStringVectorProperty<Show>(_entities[6].properties[6]);
+      obx.QueryStringVectorProperty<Show>(_entities[6].properties[5]);
 
   /// See [Show.isDraft].
   static final isDraft =
-      obx.QueryBooleanProperty<Show>(_entities[6].properties[7]);
+      obx.QueryBooleanProperty<Show>(_entities[6].properties[6]);
 
   /// See [Show.showTypeString].
   static final showTypeString =
+      obx.QueryStringProperty<Show>(_entities[6].properties[7]);
+
+  /// See [Show.facilityName].
+  static final facilityName =
       obx.QueryStringProperty<Show>(_entities[6].properties[8]);
+
+  /// See [Show.facilityAddress].
+  static final facilityAddress =
+      obx.QueryStringProperty<Show>(_entities[6].properties[9]);
 
   /// see [Show.riders]
   static final riders =
