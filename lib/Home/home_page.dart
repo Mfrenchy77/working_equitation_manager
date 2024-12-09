@@ -5,6 +5,7 @@ import 'package:working_equitation_manager/Database/objectbox.dart';
 import 'package:working_equitation_manager/Home/Dialogs/delete_show_dialog.dart';
 import 'package:working_equitation_manager/Home/show_list_cubit.dart';
 import 'package:working_equitation_manager/New%20Show/new_show_page.dart';
+import 'package:working_equitation_manager/Show/show_page.dart';
 import 'package:working_equitation_manager/Utils/common_widgets.dart';
 
 class HomePage extends StatelessWidget {
@@ -55,6 +56,16 @@ class HomePage extends StatelessWidget {
                       final show = shows[index];
                       return ListTile(
                         isThreeLine: true,
+                        onLongPress: () {
+                          debugPrint('Show ${show.id} long pressed');
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return NewShowPage(
+                              draftShow: show,
+                              objectBox: objectBox,
+                            );
+                          }));
+                        },
                         onTap: () {
                           debugPrint('Show ${show.id} tapped\n'
                               ' showtype: ${show.showType}');
@@ -72,6 +83,13 @@ class HomePage extends StatelessWidget {
                             }));
                           } else {
                             debugPrint('Show ${show.id} is a final show');
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return ShowPage(
+                                show: show,
+                                objectBox: objectBox,
+                              );
+                            }));
 
                             // if the show is final, open the show details page
                           }

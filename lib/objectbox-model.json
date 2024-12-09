@@ -256,7 +256,7 @@
     },
     {
       "id": "7:5717436637775268798",
-      "lastPropertyId": "15:1286389775037105914",
+      "lastPropertyId": "25:5857763665266993443",
       "name": "Show",
       "properties": [
         {
@@ -281,24 +281,9 @@
           "type": 9
         },
         {
-          "id": "6:5342386886133429611",
-          "name": "showDateAndStartTime",
-          "type": 10
-        },
-        {
-          "id": "7:4085013099005688624",
-          "name": "showOrganizers",
-          "type": 30
-        },
-        {
           "id": "8:6028468566126476842",
           "name": "isDraft",
           "type": 1
-        },
-        {
-          "id": "11:3386301996721487134",
-          "name": "showTypeString",
-          "type": 9
         },
         {
           "id": "14:7864380504808640336",
@@ -309,6 +294,57 @@
           "id": "15:1286389775037105914",
           "name": "facilityAddress",
           "type": 9
+        },
+        {
+          "id": "17:2052934903348444718",
+          "name": "dbShowType",
+          "type": 6
+        },
+        {
+          "id": "18:4828651896178744117",
+          "name": "facilityCity",
+          "type": 9
+        },
+        {
+          "id": "19:7440815077535565500",
+          "name": "facilityState",
+          "type": 9
+        },
+        {
+          "id": "20:5833133441392990402",
+          "name": "showStartDateAndStartTime",
+          "type": 10
+        },
+        {
+          "id": "21:857201840881900431",
+          "name": "showEndDateAndEndTime",
+          "type": 10
+        },
+        {
+          "id": "22:7532329056551201209",
+          "name": "levelsOffered",
+          "type": 27
+        },
+        {
+          "id": "23:7614364847764987305",
+          "name": "cattleTrialOffered",
+          "type": 1
+        },
+        {
+          "id": "24:8706539983525398301",
+          "name": "gateStewardId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "6:5185201747406260062",
+          "relationTarget": "Official"
+        },
+        {
+          "id": "25:5857763665266993443",
+          "name": "showSecretaryId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "7:7655038648370927855",
+          "relationTarget": "Official"
         }
       ],
       "relations": [
@@ -316,6 +352,26 @@
           "id": "5:6368276511851888509",
           "name": "riders",
           "targetId": "6:4883577621006176284"
+        },
+        {
+          "id": "6:6913197008308382287",
+          "name": "judges",
+          "targetId": "9:2721954097602414563"
+        },
+        {
+          "id": "7:127664521986415230",
+          "name": "technicalDelegates",
+          "targetId": "9:2721954097602414563"
+        },
+        {
+          "id": "8:8360045863620689094",
+          "name": "otherOfficials",
+          "targetId": "9:2721954097602414563"
+        },
+        {
+          "id": "9:2032715544032227942",
+          "name": "showOrganizers",
+          "targetId": "9:2721954097602414563"
         }
       ]
     },
@@ -352,11 +408,50 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "9:2721954097602414563",
+      "lastPropertyId": "8:640193459708131675",
+      "name": "Official",
+      "properties": [
+        {
+          "id": "1:4271658904383762260",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:4334870300845475377",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "4:3224264468390939224",
+          "name": "email",
+          "type": 9
+        },
+        {
+          "id": "5:6566575833831851568",
+          "name": "phoneNumber",
+          "type": 9
+        },
+        {
+          "id": "7:8376555328277500870",
+          "name": "dbRole",
+          "type": 6
+        },
+        {
+          "id": "8:640193459708131675",
+          "name": "dbJudgeType",
+          "type": 6
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "8:4065534881636303013",
-  "lastIndexId": "5:154860879866054309",
-  "lastRelationId": "5:6368276511851888509",
+  "lastEntityId": "9:2721954097602414563",
+  "lastIndexId": "7:7655038648370927855",
+  "lastRelationId": "9:2032715544032227942",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
   "modelVersionParserMinimum": 5,
@@ -368,7 +463,13 @@
     6238531958365320550,
     9006543490485820043,
     2455015182728008432,
-    5292552555377055273
+    5292552555377055273,
+    5502783233324132505,
+    4365446635869491183,
+    3386301996721487134,
+    6994374192354912615,
+    5342386886133429611,
+    4085013099005688624
   ],
   "retiredRelationUids": [],
   "version": 1

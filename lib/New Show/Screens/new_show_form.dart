@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:working_equitation_manager/Home/home_page.dart';
 import 'package:working_equitation_manager/New%20Show/Cubit/show_form_cubit.dart';
+import 'package:working_equitation_manager/New%20Show/Screens/new_show_confirmation.dart';
+import 'package:working_equitation_manager/New%20Show/Screens/new_show_levels.dart';
 import 'package:working_equitation_manager/New%20Show/Screens/show_basic_details.dart';
 import 'package:working_equitation_manager/New%20Show/Screens/show_license_request.dart';
+import 'package:working_equitation_manager/New%20Show/Screens/show_officals_form.dart';
 import 'package:working_equitation_manager/New%20Show/Screens/show_type_selection.dart';
 
 class NewShowForm extends StatelessWidget {
@@ -42,8 +45,7 @@ class NewShowForm extends StatelessWidget {
           },
           child: Scaffold(
             appBar: AppBar(
-              title: Text(
-                  state.show == null ? 'Create New Show' : 'Edit New Show'),
+              title: const _NewShowFormText(),
               leading: state.currentPage == 0
                   ? IconButton(
                       icon: const Icon(Icons.close),
@@ -74,24 +76,50 @@ class NewShowForm extends StatelessWidget {
               children: [
                 ShowBasicDetails(),
                 ShowTypeSelection(),
-
+                NewShowLevels(),
                 ShowLicenseRequest(),
-                // Additional steps can be added here
+                ShowOfficalsForm(),
+                ShowConfirmation(),
               ],
             ),
-            floatingActionButton: ElevatedButton(
-              onPressed:
-                  // disable the next button when the required fields are not filled
-
-                  cubit.isNextButtonEnabled()
-                      ? () {
-                          cubit.nextPage();
-                        }
-                      : null,
-              child: const Text('Next'),
+            floatingActionButton: Visibility(
+              visible: state.currentPage != 5,
+              child: ElevatedButton(
+                onPressed: cubit.isNextButtonEnabled() ? cubit.nextPage : null,
+                child: Text('Next'),
+              ),
             ),
           ),
         );
+      },
+    );
+  }
+}
+
+class _NewShowFormText extends StatelessWidget {
+  const _NewShowFormText();
+  //based on the current page, the text will change
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ShowFormCubit, ShowFormState>(
+      builder: (context, state) {
+        switch (state.currentPage) {
+          case 0:
+            return const Text('Basic Details');
+          case 1:
+            return const Text('Show Type');
+          case 2:
+            return const Text('Levels Offered');
+
+          case 3:
+            return const Text('License Request');
+          case 4:
+            return const Text('Add Officials');
+          case 5:
+            return const Text('Confirmation');
+          default:
+            return const Text('Unknown');
+        }
       },
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:working_equitation_manager/Database/Models/show.dart';
 import 'package:working_equitation_manager/New%20Show/Cubit/show_form_cubit.dart';
 
 class ShowTypeSelection extends StatelessWidget {
@@ -21,33 +22,42 @@ class ShowTypeSelection extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 20),
-              RadioListTile<ShowType>(
-                selected: state.showType == ShowType.Schooling,
-                title: const Text('Schooling Show'),
-                value: ShowType.Schooling,
-                groupValue: state.showType,
-                onChanged: (ShowType? value) {
-                  cubit.setShowType(value!);
-                },
-              ),
-              RadioListTile<ShowType>(
-                selected: state.showType == ShowType.Licensed,
-                title: const Text('Licensed Show'),
-                value: ShowType.Licensed,
-                groupValue: state.showType,
-                onChanged: (ShowType? value) {
-                  cubit.setShowType(value!);
-                },
-              ),
-              RadioListTile<ShowType>(
-                selected: state.showType == ShowType.Championship,
-                title: const Text('Championship'),
-                value: ShowType.Championship,
-                groupValue: state.showType,
-                onChanged: (ShowType? value) {
-                  cubit.setShowType(value!);
-                },
-              ),
+              Card(
+                child: Padding(
+                  padding: EdgeInsets.all(16),
+                  child: Column(
+                    children: [
+                      RadioListTile<ShowType>(
+                        selected: state.showType == ShowType.Schooling,
+                        title: const Text('Schooling Show'),
+                        value: ShowType.Schooling,
+                        groupValue: state.showType,
+                        onChanged: (ShowType? value) {
+                          cubit.setShowType(value!);
+                        },
+                      ),
+                      RadioListTile<ShowType>(
+                        selected: state.showType == ShowType.Licensed,
+                        title: const Text('Licensed Show'),
+                        value: ShowType.Licensed,
+                        groupValue: state.showType,
+                        onChanged: (ShowType? value) {
+                          cubit.setShowType(value!);
+                        },
+                      ),
+                      RadioListTile<ShowType>(
+                        selected: state.showType == ShowType.Championship,
+                        title: const Text('Championship'),
+                        value: ShowType.Championship,
+                        groupValue: state.showType,
+                        onChanged: (ShowType? value) {
+                          cubit.setShowType(value!);
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              )
             ],
           ),
         );

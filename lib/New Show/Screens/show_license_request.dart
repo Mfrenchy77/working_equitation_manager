@@ -26,8 +26,19 @@ class _ShowLicenseRequestState extends State<ShowLicenseRequest> {
     }
 
     if (show.showType == ShowType.Schooling) {
-// goto the next page
-      context.read<ShowFormCubit>().nextPage();
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Since ${show.competitionName ?? "the show"} '
+              'is a Schooling Show, a license number is not required.',
+              style: TextStyle(fontSize: 18),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      );
     }
 
     return Card(
@@ -38,55 +49,69 @@ class _ShowLicenseRequestState extends State<ShowLicenseRequest> {
           children: [
             Text(
               'Since ${show.competitionName ?? "the show"} '
-              'is a ${show.showType?.name}, a license number is required.',
+              'is a ${show.showType?.name} competitioin, a license number is required.',
               style: TextStyle(fontSize: 18),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 20),
-            Text(
-              'The USA Working Equitation requires a license number request to be submitted at least 2 weeks before the show.',
-              style: TextStyle(fontSize: 14),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 20),
-      
-            // Buttons to choose whether the user has a license number or not
-            ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  hasLicenseNumber = true;
-                });
-                context.read<ShowFormCubit>().licenseNeededChanged(false);
-              },
-              child: Text('I already have a license number'),
-            ),
-            const SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  hasLicenseNumber = false;
-                });
-                context.read<ShowFormCubit>().licenseNeededChanged(true);
-              },
-              child: Text('I need to apply for a license'),
-            ),
-      
-            // Conditional form field to input the license number if the user has one
-            if (hasLicenseNumber) ...[
-              const SizedBox(height: 20),
-              TextField(
-                keyboardType: TextInputType.number,
-                controller: licenseNumberController,
-                decoration: InputDecoration(
-                  labelText: 'License Number',
-                  hintText: 'Enter your license number',
+            Card(
+              child: Padding(
+                padding: EdgeInsets.all(16),
+                child: Column(
+                  children: [
+                    Text(
+                      'The USA Working Equitation requires a license number request to be submitted at least 2 weeks before the show.',
+                      style: TextStyle(fontSize: 14),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 20),
+
+                    // Buttons to choose whether the user has a license number or not
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          hasLicenseNumber = true;
+                        });
+                        context
+                            .read<ShowFormCubit>()
+                            .licenseNeededChanged(false);
+                      },
+                      child: Text('I already have a license number'),
+                    ),
+                    const SizedBox(height: 10),
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          hasLicenseNumber = false;
+                        });
+                        context
+                            .read<ShowFormCubit>()
+                            .licenseNeededChanged(true);
+                      },
+                      child: Text('I need to apply for a license'),
+                    ),
+
+                    // Conditional form field to input the license number if the user has one
+                    if (hasLicenseNumber) ...[
+                      const SizedBox(height: 20),
+                      TextField(
+                        keyboardType: TextInputType.number,
+                        controller: licenseNumberController,
+                        decoration: InputDecoration(
+                          labelText: 'License Number',
+                          hintText: 'Enter your license number',
+                        ),
+                        onChanged: (value) {
+                          context
+                              .read<ShowFormCubit>()
+                              .licenseNumberChanged(value);
+                        },
+                      ),
+                    ],
+                   
+                  ],
                 ),
-                onChanged: (value) {
-                  context.read<ShowFormCubit>().licenseNumberChanged(value);
-                },
               ),
-              const SizedBox(height: 20),
-            ],
+            )
           ],
         ),
       ),

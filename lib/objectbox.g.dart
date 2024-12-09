@@ -19,6 +19,7 @@ import 'Database/Models/dressage_trial.dart';
 import 'Database/Models/ease_of_handling_trial.dart';
 import 'Database/Models/horse.dart';
 import 'Database/Models/movement.dart';
+import 'Database/Models/offical.dart';
 import 'Database/Models/rider.dart';
 import 'Database/Models/show.dart';
 import 'Database/Models/speed_trial.dart';
@@ -271,7 +272,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(7, 5717436637775268798),
       name: 'Show',
-      lastPropertyId: const obx_int.IdUid(15, 1286389775037105914),
+      lastPropertyId: const obx_int.IdUid(25, 5857763665266993443),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -295,24 +296,9 @@ final _entities = <obx_int.ModelEntity>[
             type: 9,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(6, 5342386886133429611),
-            name: 'showDateAndStartTime',
-            type: 10,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(7, 4085013099005688624),
-            name: 'showOrganizers',
-            type: 30,
-            flags: 0),
-        obx_int.ModelProperty(
             id: const obx_int.IdUid(8, 6028468566126476842),
             name: 'isDraft',
             type: 1,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(11, 3386301996721487134),
-            name: 'showTypeString',
-            type: 9,
             flags: 0),
         obx_int.ModelProperty(
             id: const obx_int.IdUid(14, 7864380504808640336),
@@ -323,13 +309,78 @@ final _entities = <obx_int.ModelEntity>[
             id: const obx_int.IdUid(15, 1286389775037105914),
             name: 'facilityAddress',
             type: 9,
-            flags: 0)
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(17, 2052934903348444718),
+            name: 'dbShowType',
+            type: 6,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(18, 4828651896178744117),
+            name: 'facilityCity',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(19, 7440815077535565500),
+            name: 'facilityState',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(20, 5833133441392990402),
+            name: 'showStartDateAndStartTime',
+            type: 10,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(21, 857201840881900431),
+            name: 'showEndDateAndEndTime',
+            type: 10,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(22, 7532329056551201209),
+            name: 'levelsOffered',
+            type: 27,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(23, 7614364847764987305),
+            name: 'cattleTrialOffered',
+            type: 1,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(24, 8706539983525398301),
+            name: 'gateStewardId',
+            type: 11,
+            flags: 520,
+            indexId: const obx_int.IdUid(6, 5185201747406260062),
+            relationTarget: 'Official'),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(25, 5857763665266993443),
+            name: 'showSecretaryId',
+            type: 11,
+            flags: 520,
+            indexId: const obx_int.IdUid(7, 7655038648370927855),
+            relationTarget: 'Official')
       ],
       relations: <obx_int.ModelRelation>[
         obx_int.ModelRelation(
             id: const obx_int.IdUid(5, 6368276511851888509),
             name: 'riders',
-            targetId: const obx_int.IdUid(6, 4883577621006176284))
+            targetId: const obx_int.IdUid(6, 4883577621006176284)),
+        obx_int.ModelRelation(
+            id: const obx_int.IdUid(6, 6913197008308382287),
+            name: 'judges',
+            targetId: const obx_int.IdUid(9, 2721954097602414563)),
+        obx_int.ModelRelation(
+            id: const obx_int.IdUid(7, 127664521986415230),
+            name: 'technicalDelegates',
+            targetId: const obx_int.IdUid(9, 2721954097602414563)),
+        obx_int.ModelRelation(
+            id: const obx_int.IdUid(8, 8360045863620689094),
+            name: 'otherOfficials',
+            targetId: const obx_int.IdUid(9, 2721954097602414563)),
+        obx_int.ModelRelation(
+            id: const obx_int.IdUid(9, 2032715544032227942),
+            name: 'showOrganizers',
+            targetId: const obx_int.IdUid(9, 2721954097602414563))
       ],
       backlinks: <obx_int.ModelBacklink>[]),
   obx_int.ModelEntity(
@@ -361,6 +412,45 @@ final _entities = <obx_int.ModelEntity>[
         obx_int.ModelProperty(
             id: const obx_int.IdUid(5, 2442408713560850730),
             name: 'initialSpeed',
+            type: 6,
+            flags: 0)
+      ],
+      relations: <obx_int.ModelRelation>[],
+      backlinks: <obx_int.ModelBacklink>[]),
+  obx_int.ModelEntity(
+      id: const obx_int.IdUid(9, 2721954097602414563),
+      name: 'Official',
+      lastPropertyId: const obx_int.IdUid(8, 640193459708131675),
+      flags: 0,
+      properties: <obx_int.ModelProperty>[
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(1, 4271658904383762260),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(2, 4334870300845475377),
+            name: 'name',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(4, 3224264468390939224),
+            name: 'email',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(5, 6566575833831851568),
+            name: 'phoneNumber',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(7, 8376555328277500870),
+            name: 'dbRole',
+            type: 6,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(8, 640193459708131675),
+            name: 'dbJudgeType',
             type: 6,
             flags: 0)
       ],
@@ -403,9 +493,9 @@ Future<obx.Store> openStore(
 obx_int.ModelDefinition getObjectBoxModel() {
   final model = obx_int.ModelInfo(
       entities: _entities,
-      lastEntityId: const obx_int.IdUid(8, 4065534881636303013),
-      lastIndexId: const obx_int.IdUid(5, 154860879866054309),
-      lastRelationId: const obx_int.IdUid(5, 6368276511851888509),
+      lastEntityId: const obx_int.IdUid(9, 2721954097602414563),
+      lastIndexId: const obx_int.IdUid(7, 7655038648370927855),
+      lastRelationId: const obx_int.IdUid(9, 2032715544032227942),
       lastSequenceId: const obx_int.IdUid(0, 0),
       retiredEntityUids: const [],
       retiredIndexUids: const [],
@@ -415,7 +505,13 @@ obx_int.ModelDefinition getObjectBoxModel() {
         6238531958365320550,
         9006543490485820043,
         2455015182728008432,
-        5292552555377055273
+        5292552555377055273,
+        5502783233324132505,
+        4365446635869491183,
+        3386301996721487134,
+        6994374192354912615,
+        5342386886133429611,
+        4085013099005688624
       ],
       retiredRelationUids: const [],
       modelVersion: 5,
@@ -694,9 +790,17 @@ obx_int.ModelDefinition getObjectBoxModel() {
         }),
     Show: obx_int.EntityDefinition<Show>(
         model: _entities[6],
-        toOneRelations: (Show object) => [],
-        toManyRelations: (Show object) =>
-            {obx_int.RelInfo<Show>.toMany(5, object.id!): object.riders},
+        toOneRelations: (Show object) =>
+            [object.gateSteward, object.showSecretary],
+        toManyRelations: (Show object) => {
+              obx_int.RelInfo<Show>.toMany(5, object.id!): object.riders,
+              obx_int.RelInfo<Show>.toMany(6, object.id!): object.judges,
+              obx_int.RelInfo<Show>.toMany(7, object.id!):
+                  object.technicalDelegates,
+              obx_int.RelInfo<Show>.toMany(8, object.id!):
+                  object.otherOfficials,
+              obx_int.RelInfo<Show>.toMany(9, object.id!): object.showOrganizers
+            },
         getId: (Show object) => object.id,
         setId: (Show object, int id) {
           object.id = id;
@@ -705,39 +809,50 @@ obx_int.ModelDefinition getObjectBoxModel() {
           final competitionNameOffset = object.competitionName == null
               ? null
               : fbb.writeString(object.competitionName!);
-          final showOrganizersOffset = object.showOrganizers == null
-              ? null
-              : fbb.writeList(object.showOrganizers!
-                  .map(fbb.writeString)
-                  .toList(growable: false));
-          final showTypeStringOffset = object.showTypeString == null
-              ? null
-              : fbb.writeString(object.showTypeString!);
           final facilityNameOffset = object.facilityName == null
               ? null
               : fbb.writeString(object.facilityName!);
           final facilityAddressOffset = object.facilityAddress == null
               ? null
               : fbb.writeString(object.facilityAddress!);
-          fbb.startTable(16);
+          final facilityCityOffset = object.facilityCity == null
+              ? null
+              : fbb.writeString(object.facilityCity!);
+          final facilityStateOffset = object.facilityState == null
+              ? null
+              : fbb.writeString(object.facilityState!);
+          final levelsOfferedOffset = object.levelsOffered == null
+              ? null
+              : fbb.writeListInt64(object.levelsOffered!);
+          fbb.startTable(26);
           fbb.addInt64(0, object.id ?? 0);
           fbb.addInt64(1, object.regionNumber);
           fbb.addInt64(2, object.showLicenseNumber);
           fbb.addOffset(3, competitionNameOffset);
-          fbb.addInt64(5, object.showDateAndStartTime?.millisecondsSinceEpoch);
-          fbb.addOffset(6, showOrganizersOffset);
           fbb.addBool(7, object.isDraft);
-          fbb.addOffset(10, showTypeStringOffset);
           fbb.addOffset(13, facilityNameOffset);
           fbb.addOffset(14, facilityAddressOffset);
+          fbb.addInt64(16, object.dbShowType);
+          fbb.addOffset(17, facilityCityOffset);
+          fbb.addOffset(18, facilityStateOffset);
+          fbb.addInt64(
+              19, object.showStartDateAndStartTime?.millisecondsSinceEpoch);
+          fbb.addInt64(
+              20, object.showEndDateAndEndTime?.millisecondsSinceEpoch);
+          fbb.addOffset(21, levelsOfferedOffset);
+          fbb.addBool(22, object.cattleTrialOffered);
+          fbb.addInt64(23, object.gateSteward.targetId);
+          fbb.addInt64(24, object.showSecretary.targetId);
           fbb.finish(fbb.endTable());
           return object.id ?? 0;
         },
         objectFromFB: (obx.Store store, ByteData fbData) {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
-          final showDateAndStartTimeValue =
-              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 14);
+          final showStartDateAndStartTimeValue =
+              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 42);
+          final showEndDateAndEndTimeValue =
+              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 44);
           final idParam =
               const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 4);
           final regionNumberParam =
@@ -745,37 +860,69 @@ obx_int.ModelDefinition getObjectBoxModel() {
           final facilityNameParam =
               const fb.StringReader(asciiOptimization: true)
                   .vTableGetNullable(buffer, rootOffset, 30);
+          final facilityCityParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 38);
+          final facilityStateParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 40);
+          final levelsOfferedParam =
+              const fb.ListReader<int>(fb.Int64Reader(), lazy: false)
+                  .vTableGetNullable(buffer, rootOffset, 46);
           final isDraftParam =
               const fb.BoolReader().vTableGet(buffer, rootOffset, 18, false);
-          final showOrganizersParam = const fb.ListReader<String>(
-                  fb.StringReader(asciiOptimization: true),
-                  lazy: false)
-              .vTableGetNullable(buffer, rootOffset, 16);
-          final competitionNameParam =
-              const fb.StringReader(asciiOptimization: true)
-                  .vTableGetNullable(buffer, rootOffset, 10);
           final facilityAddressParam =
               const fb.StringReader(asciiOptimization: true)
                   .vTableGetNullable(buffer, rootOffset, 32);
+          final competitionNameParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 10);
           final showLicenseNumberParam =
               const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 8);
-          final showDateAndStartTimeParam = showDateAndStartTimeValue == null
+          final showEndDateAndEndTimeParam = showEndDateAndEndTimeValue == null
               ? null
-              : DateTime.fromMillisecondsSinceEpoch(showDateAndStartTimeValue);
+              : DateTime.fromMillisecondsSinceEpoch(showEndDateAndEndTimeValue);
+          final showStartDateAndStartTimeParam =
+              showStartDateAndStartTimeValue == null
+                  ? null
+                  : DateTime.fromMillisecondsSinceEpoch(
+                      showStartDateAndStartTimeValue);
+          final cattleTrialOfferedParam =
+              const fb.BoolReader().vTableGet(buffer, rootOffset, 48, false);
           final object = Show(
               id: idParam,
               regionNumber: regionNumberParam,
               facilityName: facilityNameParam,
+              facilityCity: facilityCityParam,
+              facilityState: facilityStateParam,
+              levelsOffered: levelsOfferedParam,
               isDraft: isDraftParam,
-              showOrganizers: showOrganizersParam,
-              competitionName: competitionNameParam,
               facilityAddress: facilityAddressParam,
+              competitionName: competitionNameParam,
               showLicenseNumber: showLicenseNumberParam,
-              showDateAndStartTime: showDateAndStartTimeParam)
-            ..showTypeString = const fb.StringReader(asciiOptimization: true)
-                .vTableGetNullable(buffer, rootOffset, 24);
+              showEndDateAndEndTime: showEndDateAndEndTimeParam,
+              showStartDateAndStartTime: showStartDateAndStartTimeParam,
+              cattleTrialOffered: cattleTrialOfferedParam)
+            ..dbShowType = const fb.Int64Reader()
+                .vTableGetNullable(buffer, rootOffset, 36);
+          object.gateSteward.targetId =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 50, 0);
+          object.gateSteward.attach(store);
+          object.showSecretary.targetId =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 52, 0);
+          object.showSecretary.attach(store);
           obx_int.InternalToManyAccess.setRelInfo<Show>(object.riders, store,
               obx_int.RelInfo<Show>.toMany(5, object.id!));
+          obx_int.InternalToManyAccess.setRelInfo<Show>(object.judges, store,
+              obx_int.RelInfo<Show>.toMany(6, object.id!));
+          obx_int.InternalToManyAccess.setRelInfo<Show>(
+              object.technicalDelegates,
+              store,
+              obx_int.RelInfo<Show>.toMany(7, object.id!));
+          obx_int.InternalToManyAccess.setRelInfo<Show>(object.otherOfficials,
+              store, obx_int.RelInfo<Show>.toMany(8, object.id!));
+          obx_int.InternalToManyAccess.setRelInfo<Show>(object.showOrganizers,
+              store, obx_int.RelInfo<Show>.toMany(9, object.id!));
           return object;
         }),
     SpeedTrial: obx_int.EntityDefinition<SpeedTrial>(
@@ -815,6 +962,55 @@ obx_int.ModelDefinition getObjectBoxModel() {
               penalties: penaltiesParam,
               finalSpeed: finalSpeedParam,
               initialSpeed: initialSpeedParam);
+
+          return object;
+        }),
+    Official: obx_int.EntityDefinition<Official>(
+        model: _entities[8],
+        toOneRelations: (Official object) => [],
+        toManyRelations: (Official object) => {},
+        getId: (Official object) => object.id,
+        setId: (Official object, int id) {
+          object.id = id;
+        },
+        objectToFB: (Official object, fb.Builder fbb) {
+          final nameOffset = fbb.writeString(object.name);
+          final emailOffset =
+              object.email == null ? null : fbb.writeString(object.email!);
+          final phoneNumberOffset = object.phoneNumber == null
+              ? null
+              : fbb.writeString(object.phoneNumber!);
+          fbb.startTable(9);
+          fbb.addInt64(0, object.id ?? 0);
+          fbb.addOffset(1, nameOffset);
+          fbb.addOffset(3, emailOffset);
+          fbb.addOffset(4, phoneNumberOffset);
+          fbb.addInt64(6, object.dbRole);
+          fbb.addInt64(7, object.dbJudgeType);
+          fbb.finish(fbb.endTable());
+          return object.id ?? 0;
+        },
+        objectFromFB: (obx.Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final idParam =
+              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 4);
+          final emailParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 10);
+          final phoneNumberParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 12);
+          final nameParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 6, '');
+          final object = Official(
+              id: idParam,
+              email: emailParam,
+              phoneNumber: phoneNumberParam,
+              name: nameParam)
+            ..dbRole =
+                const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 16)
+            ..dbJudgeType = const fb.Int64Reader()
+                .vTableGetNullable(buffer, rootOffset, 18);
 
           return object;
         })
@@ -1003,33 +1199,73 @@ class Show_ {
   static final competitionName =
       obx.QueryStringProperty<Show>(_entities[6].properties[3]);
 
-  /// See [Show.showDateAndStartTime].
-  static final showDateAndStartTime =
-      obx.QueryDateProperty<Show>(_entities[6].properties[4]);
-
-  /// See [Show.showOrganizers].
-  static final showOrganizers =
-      obx.QueryStringVectorProperty<Show>(_entities[6].properties[5]);
-
   /// See [Show.isDraft].
   static final isDraft =
-      obx.QueryBooleanProperty<Show>(_entities[6].properties[6]);
-
-  /// See [Show.showTypeString].
-  static final showTypeString =
-      obx.QueryStringProperty<Show>(_entities[6].properties[7]);
+      obx.QueryBooleanProperty<Show>(_entities[6].properties[4]);
 
   /// See [Show.facilityName].
   static final facilityName =
-      obx.QueryStringProperty<Show>(_entities[6].properties[8]);
+      obx.QueryStringProperty<Show>(_entities[6].properties[5]);
 
   /// See [Show.facilityAddress].
   static final facilityAddress =
+      obx.QueryStringProperty<Show>(_entities[6].properties[6]);
+
+  /// See [Show.dbShowType].
+  static final dbShowType =
+      obx.QueryIntegerProperty<Show>(_entities[6].properties[7]);
+
+  /// See [Show.facilityCity].
+  static final facilityCity =
+      obx.QueryStringProperty<Show>(_entities[6].properties[8]);
+
+  /// See [Show.facilityState].
+  static final facilityState =
       obx.QueryStringProperty<Show>(_entities[6].properties[9]);
+
+  /// See [Show.showStartDateAndStartTime].
+  static final showStartDateAndStartTime =
+      obx.QueryDateProperty<Show>(_entities[6].properties[10]);
+
+  /// See [Show.showEndDateAndEndTime].
+  static final showEndDateAndEndTime =
+      obx.QueryDateProperty<Show>(_entities[6].properties[11]);
+
+  /// See [Show.levelsOffered].
+  static final levelsOffered =
+      obx.QueryIntegerVectorProperty<Show>(_entities[6].properties[12]);
+
+  /// See [Show.cattleTrialOffered].
+  static final cattleTrialOffered =
+      obx.QueryBooleanProperty<Show>(_entities[6].properties[13]);
+
+  /// See [Show.gateSteward].
+  static final gateSteward =
+      obx.QueryRelationToOne<Show, Official>(_entities[6].properties[14]);
+
+  /// See [Show.showSecretary].
+  static final showSecretary =
+      obx.QueryRelationToOne<Show, Official>(_entities[6].properties[15]);
 
   /// see [Show.riders]
   static final riders =
       obx.QueryRelationToMany<Show, Rider>(_entities[6].relations[0]);
+
+  /// see [Show.judges]
+  static final judges =
+      obx.QueryRelationToMany<Show, Official>(_entities[6].relations[1]);
+
+  /// see [Show.technicalDelegates]
+  static final technicalDelegates =
+      obx.QueryRelationToMany<Show, Official>(_entities[6].relations[2]);
+
+  /// see [Show.otherOfficials]
+  static final otherOfficials =
+      obx.QueryRelationToMany<Show, Official>(_entities[6].relations[3]);
+
+  /// see [Show.showOrganizers]
+  static final showOrganizers =
+      obx.QueryRelationToMany<Show, Official>(_entities[6].relations[4]);
 }
 
 /// [SpeedTrial] entity fields to define ObjectBox queries.
@@ -1053,4 +1289,31 @@ class SpeedTrial_ {
   /// See [SpeedTrial.initialSpeed].
   static final initialSpeed =
       obx.QueryIntegerProperty<SpeedTrial>(_entities[7].properties[4]);
+}
+
+/// [Official] entity fields to define ObjectBox queries.
+class Official_ {
+  /// See [Official.id].
+  static final id =
+      obx.QueryIntegerProperty<Official>(_entities[8].properties[0]);
+
+  /// See [Official.name].
+  static final name =
+      obx.QueryStringProperty<Official>(_entities[8].properties[1]);
+
+  /// See [Official.email].
+  static final email =
+      obx.QueryStringProperty<Official>(_entities[8].properties[2]);
+
+  /// See [Official.phoneNumber].
+  static final phoneNumber =
+      obx.QueryStringProperty<Official>(_entities[8].properties[3]);
+
+  /// See [Official.dbRole].
+  static final dbRole =
+      obx.QueryIntegerProperty<Official>(_entities[8].properties[4]);
+
+  /// See [Official.dbJudgeType].
+  static final dbJudgeType =
+      obx.QueryIntegerProperty<Official>(_entities[8].properties[5]);
 }

@@ -1,74 +1,121 @@
-import 'package:objectbox/objectbox.dart';
-import 'package:working_equitation_manager/Database/Models/rider.dart';
-import 'package:working_equitation_manager/New%20Show/Cubit/show_form_cubit.dart';
-import 'package:working_equitation_manager/objectbox.g.dart';
+// ignore_for_file: constant_identifier_names
 
-/// The Show class represents a show in the Working Equitation Manager app.
-/// Shows are used to store information about a show, the name, date, location,
-/// start, showtype region, and license number. It also all of the riders that
-/// are participating in the show which contain all of their scores.
+import 'package:objectbox/objectbox.dart';
+import 'package:working_equitation_manager/Database/Models/offical.dart';
+import 'package:working_equitation_manager/Database/Models/rider.dart';
+
+enum ShowType {
+  Schooling,
+  Licensed,
+  Championship,
+}
+
+enum Levels {
+  L1,
+  L2,
+  L3,
+  L4,
+  L5,
+  L6,
+  L7,
+}
+
 @Entity()
 class Show {
-  /// The unique identifier for the show.
   @Id()
-  int? id = 0;
+  int? id;
 
-  /// Set the Draft status of the show.
+  /// Indicates if the show is a draft
   bool isDraft;
 
-  /// The Region number of the show.
+  /// Region number of the show
   int? regionNumber;
 
-  /// The facility name
+  /// Facility information
   String? facilityName;
+  String? facilityAddress;
+  String? facilityCity;
+  String? facilityState;
 
-  /// The show's ShowType stored as a string.
-  String? showTypeString;
+  /// Competition details
+  String? competitionName;
+  @Property(type: PropertyType.date)
+  DateTime? showStartDateAndStartTime;
+  @Property(type: PropertyType.date)
+  DateTime? showEndDateAndEndTime;
 
-  /// The license number of the show.
+  /// Show type (backed by enum)
+  @Transient()
+  ShowType? showType;
+
+  int? get dbShowType {
+    _ensureStableEnumValues();
+    return showType?.index;
+  }
+
+  set dbShowType(int? value) {
+    _ensureStableEnumValues();
+    if (value == null) {
+      showType = ShowType.Schooling;
+    } else {
+      showType = value >= 0 && value < ShowType.values.length
+          ? ShowType.values[value]
+          : ShowType.Schooling;
+    }
+  }
+
+  /// Levels offered (e.g., L1, L2)
+  List<int>? levelsOffered;
+
+  /// License number of the show
   int? showLicenseNumber;
 
-  /// The name of the show.
-  String? competitionName;
+  /// Whether the cattle trial is offered
+  bool cattleTrialOffered;
 
-  /// The facility address
-  String? facilityAddress;
+  /// Officials for the show
+  final judges = ToMany<Official>();
+  final gateSteward = ToOne<Official>();
+  final showSecretary = ToOne<Official>();
+  final otherOfficials = ToMany<Official>();
+  final showOrganizers = ToMany<Official>();
+  final technicalDelegates = ToMany<Official>();
 
-  /// The date of the show and start time including time zone.
-  DateTime? showDateAndStartTime;
-
-  /// Provide the names and email addresses of up to two (2) people you’d like to
-  /// have set up as GIRA organizers to be authorized to set up, score, print results, and download the
-  /// show results excel file(s)
-  List<String>? showOrganizers;
-
+  /// Riders participating in the show
   final riders = ToMany<Rider>();
 
   Show({
     this.id,
+    this.showType,
     this.regionNumber,
-    ShowType? showType,
     this.facilityName,
+    this.facilityCity,
+    this.facilityState,
+    this.levelsOffered,
     this.isDraft = true,
-    this.showOrganizers,
-    this.competitionName,
     this.facilityAddress,
+    this.competitionName,
     this.showLicenseNumber,
-    this.showDateAndStartTime,
-  }) : showTypeString = showType?.name;
+    this.showEndDateAndEndTime,
+    this.showStartDateAndStartTime,
+    this.cattleTrialOffered = false,
+  });
 
-  // Copy with method
   Show copyWith({
     int? id,
     bool? isDraft,
     int? regionNumber,
     ShowType? showType,
     String? facilityName,
+    String? facilityCity,
+    String? facilityState,
     int? showLicenseNumber,
     String? competitionName,
     String? facilityAddress,
-    List<String>? showOrganizers,
-    DateTime? showDateAndStartTime,
+    List<int>? levelsOffered,
+    bool? cattleTrialOffered,
+    DateTime? showEndDateAndEndTime,
+    DateTime? showStartDateAndStartTime,
   }) {
     return Show(
       id: id ?? this.id,
@@ -76,72 +123,28 @@ class Show {
       showType: showType ?? this.showType,
       regionNumber: regionNumber ?? this.regionNumber,
       facilityName: facilityName ?? this.facilityName,
-      showOrganizers: showOrganizers ?? this.showOrganizers,
+      facilityCity: facilityCity ?? this.facilityCity,
+      facilityState: facilityState ?? this.facilityState,
+      levelsOffered: levelsOffered ?? this.levelsOffered,
       competitionName: competitionName ?? this.competitionName,
       facilityAddress: facilityAddress ?? this.facilityAddress,
       showLicenseNumber: showLicenseNumber ?? this.showLicenseNumber,
-      showDateAndStartTime: showDateAndStartTime ?? this.showDateAndStartTime,
+      cattleTrialOffered: cattleTrialOffered ?? this.cattleTrialOffered,
+      showEndDateAndEndTime:
+          showEndDateAndEndTime ?? this.showEndDateAndEndTime,
+      showStartDateAndStartTime:
+          showStartDateAndStartTime ?? this.showStartDateAndStartTime,
     );
   }
 
-  // Getter and setter to convert the String back to ShowType
-  ShowType? get showType => showTypeString != null
-      ? ShowType.values.firstWhere(
-          (e) => e.name == showTypeString,
-          orElse: () => ShowType.Schooling,
-        )
-      : null;
+  @override
+  String toString() {
+    return 'Show{id: $id, competitionName: $competitionName, showType: $showType, facilityName: $facilityName, regionNumber: $regionNumber, levelsOffered: $levelsOffered, cattleTrialOffered: $cattleTrialOffered}';
+  }
 
-  set showType(ShowType? showType) {
-    showTypeString = showType?.name;
+  void _ensureStableEnumValues() {
+    assert(ShowType.Schooling.index == 0);
+    assert(ShowType.Licensed.index == 1);
+    assert(ShowType.Championship.index == 2);
   }
 }
-
-//   //copywith
-//   Show copyWith({
-//     int? id,
-//     int? regionNumber,
-//     int? showLicenseNumber,
-//     String? competitionName,
-//     String? facuilityNameandAddress,
-//     String? showDateAndStartTime,
-//     List<String>? showOrganizers,
-//   }) {
-//     return Show(
-//       id: id ?? this.id,
-//       regionNumber: regionNumber ?? this.regionNumber,
-//       showLicenseNumber: showLicenseNumber ?? this.showLicenseNumber,
-//       competitionName: competitionName ?? this.competitionName,
-//       facuilityNameandAddress:
-//           facuilityNameandAddress ?? this.facuilityNameandAddress,
-//       showDateAndStartTime: showDateAndStartTime ?? this.showDateAndStartTime,
-//       showOrganizers: showOrganizers ?? this.showOrganizers,
-//     );
-//   }
-
-//   //to map
-//   Map<String, dynamic> toMap() {
-//     return {
-//       'id': id,
-//       'regionNumber': regionNumber,
-//       'showLicenseNumber': showLicenseNumber,
-//       'competitionName': competitionName,
-//       'facuilityNameandAddress': facuilityNameandAddress,
-//       'showDateAndStartTime': showDateAndStartTime,
-//       'showOrganizers': showOrganizers,
-//     };
-//   }
-
-//   //from map
-//   factory Show.fromMap(Map<String, dynamic> map) {
-//     return Show(
-//       id: map['id'],
-//       regionNumber: map['regionNumber'],
-//       showLicenseNumber: map['showLicenseNumber'],
-//       competitionName: map['competitionName'],
-//       facuilityNameandAddress: map['facuilityNameandAddress'],
-//       showDateAndStartTime: map['showDateAndStartTime'],
-//       showOrganizers: List<String>.from(map['showOrganizers']),
-//     );
-//   }
-// }
