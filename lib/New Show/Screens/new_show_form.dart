@@ -24,8 +24,25 @@ class NewShowForm extends StatelessWidget {
                 previous.isError != current.isError;
           },
           listener: (context, state) {
-            pageController.jumpToPage(state.currentPage);
+            final duration = Duration(milliseconds: 300);
+            final curve = Curves.easeInOut;
 
+            if (state.currentPage > pageController.page!) {
+              // Forward transition
+              pageController.animateToPage(
+                state.currentPage,
+                duration: duration,
+                curve: curve,
+              );
+            } else {
+              // Backward transition
+              pageController.animateToPage(
+                state.currentPage,
+                duration: duration,
+                curve: curve,
+              );
+            }
+            // Show error message if there is an error
             if (state.isError) {
               ScaffoldMessenger.of(context)
                 ..hideCurrentSnackBar()
